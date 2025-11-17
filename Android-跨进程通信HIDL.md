@@ -2,7 +2,8 @@
 
 概述
 
-![image-20251024161803530](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251024161803530.png)
+<img width="741" height="762" alt="image" src="https://github.com/user-attachments/assets/5465aa3d-98f0-4833-8298-c1c11c62cb2d" />
+
 
 1. broadcastradio hal2 的 Android 源码位于 hardware/interfaces/broadcastradio 目录下
 2. hal 进程作为服务端，调用 open/mmap/ioctol 系统接口使用 Binder IPC ，向 HIDL Service Manager 注册服务，frameworks 会在应用软件调用相关接口时去 HIDL 的 ServiceManager 找 hal 层的服务，如果找到，则顺利调用到 hal 层，否则，报错。
@@ -179,5 +180,6 @@ public @NonNull TunerSession openSession(@NonNull android.hardware.radio.ITunerC
     ...
 }
 ```
+
 
 
