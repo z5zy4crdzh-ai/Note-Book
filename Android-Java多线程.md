@@ -955,7 +955,8 @@ for (int i = 0; i < 10; i++) {
 现行大多数GUI程序都是单线程的。Android中单线程可用于数据库操作，文件操作，应用批量安装，应用批量删除等不适合并发但可能IO阻塞性及影响UI线程响应的操作。
 ```
 
-![image-20251023160821970](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251023160821970.png)
+<img width="943" height="162" alt="image" src="https://github.com/user-attachments/assets/4bb221a0-2a0e-4014-a825-5d14dfadf6de" />
+
 
 简单来说就是将这个传入的runnable对象提交到线程池中，等待执行；如果线程池关闭，或者容量到上限不可以执行了，那么就无法提交，会交给线程池的RejectedExecutionHandler进行处理（这个RejectedExecutionHandler在构造方法中传入，或者通过setRejectedExecutionHandler(handler)方法指定）
 
@@ -988,9 +989,12 @@ exec.execute(new Runnable() {
 新建线程自不必说，主要看看添加到任务队列中的任务是如何被执行的。
 从2.1中我们知道，每一个工作线程必然是被一个任务唤醒的，这个任务被称作初始任务（firstTask）。当一个工作线程完了它的初始任务之后，会从待执行的任务队列（workQueue）中取新的任务。workQueue是一个阻塞队列，线程会一直等待直到有新的任务到来为止。对于一个设置了超时时间的线程，如果在指定的时间之后仍然没有新任务到达，那么这个线程就会停止等待任务并且销毁。
 
-![image-20251023161155332](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251023161155332.png)
+<img width="650" height="594" alt="image" src="https://github.com/user-attachments/assets/bbd50c45-ad67-45be-b5d5-7cbcab3d0301" />
 
-![image-20251023161212701](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251023161212701.png)
+
+<img width="604" height="744" alt="image" src="https://github.com/user-attachments/assets/40f66d9c-fc7f-4060-81a2-5bd4f5c23c88" />
+
+
 
 
 
