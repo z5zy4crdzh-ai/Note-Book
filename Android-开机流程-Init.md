@@ -318,7 +318,8 @@ build\android\system\core\init\selinux.cpp
 
 Selinux启动完后会再次携带参数调用main()进入SecondStageMain阶段
 
-![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b92cff91e15543c69430937300eb215e~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=442\&h=874\&s=78024\&e=png\&b=fefefe)
+<img width="444" height="878" alt="image" src="https://github.com/user-attachments/assets/68a5c8b5-9490-4290-9427-b4e955f13730" />
+
 
     void SelinuxInitialize() {
         Timer t;
@@ -451,7 +452,8 @@ subcontexts = InitializeSubcontexts();
 
 5.最后解析init.rc脚本，建立rc文件中定义的action 、service，按照脚本执行动作，进入无限循环，进行子进程实时监控
 
-![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9227e777b9004593905c7d8d57662c1c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=915\&h=863\&s=148477\&e=png\&b=fefefe)
+<img width="917" height="864" alt="image" src="https://github.com/user-attachments/assets/ff693467-e456-4e86-9748-83d937400c96" />
+
 
 SecondStageMain()：
 
@@ -781,4 +783,5 @@ init是kernel启动的第一个用户空间进程(pid为1)，它在经历FirstSt
         -   处理build-in action，在执行结束后被移除(oneshot)
         -   处理唤醒事件
         -   处理属性事件
+
         -   处理子进程死亡事件
