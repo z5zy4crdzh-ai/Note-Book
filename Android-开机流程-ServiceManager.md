@@ -226,7 +226,7 @@ void IPCThreadState::setTheContextObject(const sp<BBinder>& obj)
 
 为了更好的理解ServiceManager这个类，下面是一张它的继承关系图：
 
-![image-20251106110728457](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251106110728457.png)
+<img width="658" height="603" alt="image" src="https://github.com/user-attachments/assets/c71b3007-2d58-46cd-8a62-c42d8bebf10f" />
 
 
 
@@ -274,5 +274,6 @@ servicemanager进程启动过程中，主要做了以下四件事：
 总结：
 
 1.ServiceManager是一个独立的进程，由init进程创建，且在创建zygote进程之前被创建。
+
 
 2.IBinder是什么？它是实现了AIDL接口的实体类，它实现了接口中的所有方法。
