@@ -1,4 +1,4 @@
-## Android-ANR分析
+<img width="636" height="533" alt="image" src="https://github.com/user-attachments/assets/658cdfd2-7674-4be1-90b5-159304998f64" />## Android-ANR分析
 
 **正文**
 
@@ -114,7 +114,8 @@ c、倒计时完，说明操作未完成，超时，触发ANR弹框。
 
 这个倒计时时间，就是上面说的前台服务20s，后台服务200s。
 
-![image-20251105133245793](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105133245793.png)
+<img width="634" height="533" alt="image" src="https://github.com/user-attachments/assets/26296e3e-26d1-45da-a283-5bcd0a9d6225" />
+
 
 
 
@@ -350,5 +351,6 @@ mutex: 持有锁的类型。exclusive是独占锁，shared是共享锁；
 3）在service、activity声明周期中，避免复杂操作；
 
 4）编码中注意循环操作的边界控制，避免出现无限循环；
+
 
 5）设计编码中注意同步逻辑，避免出现同步死锁问题。
