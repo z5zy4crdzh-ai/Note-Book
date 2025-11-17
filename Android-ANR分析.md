@@ -1,4 +1,4 @@
-<img width="636" height="533" alt="image" src="https://github.com/user-attachments/assets/658cdfd2-7674-4be1-90b5-159304998f64" />## Android-ANR分析
+## Android-ANR分析
 
 **正文**
 
@@ -163,7 +163,8 @@ oom_adj值小于0的都为系统进程，优先级是最高的；值为0的是�
 
 另外，只有串行处理的广播才会发生ANR。并行广播系统是通过一个循环一次性发送给所有接受者，不存在超时检测。
 
-![image-20251105133327895](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105133327895.png)
+<img width="699" height="483" alt="image" src="https://github.com/user-attachments/assets/ae49a07f-347f-4290-9d56-59ada02e127e" />
+
 
 
 
@@ -171,7 +172,8 @@ oom_adj值小于0的都为系统进程，优先级是最高的；值为0的是�
 
 ContentProvider类型的ANR特别之处是在ContentProvider进程首次启动时才会检测。如果ContentProvider已经是启动后的状态，进行ContentProvider相关请求是不会触发ANR的。
 
-![image-20251105133358495](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105133358495.png)
+<img width="682" height="542" alt="image" src="https://github.com/user-attachments/assets/6ed439b2-88e4-45ba-8a84-745a277ec8a9" />
+
 
 
 
@@ -204,7 +206,8 @@ outBoundQueue 存放即将发给目标窗口的输入事件；
 
 waitQueue 记录已发送给目标应用，但尚未处理完成的输入事件。
 
-![image-20251105133554269](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105133554269.png)
+<img width="604" height="494" alt="image" src="https://github.com/user-attachments/assets/3fa35c30-c42a-4098-af94-98b5475c67e7" />
+
 
 InputDispatchingTimeout ANR发生过程：
 
@@ -230,7 +233,8 @@ InputDispatchingTimeout ANR发生过程：
 
 1）、找到发生ANR的进程以及ANR类型等摘要信息，判断是什么大概什么类型的问题。
 
-![image-20251105134025690](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105134025690.png)
+<img width="1137" height="86" alt="image" src="https://github.com/user-attachments/assets/34a17539-a2cb-4a86-91dc-8e5d6298eabf" />
+
 
 确定了ANR类型，查看系统日志，判断此次ANR经历的阶段。结合我们上面学到的ANR原理的知识。判断大概是哪个阶段出现问题。
 
@@ -238,7 +242,8 @@ InputDispatchingTimeout ANR发生过程：
 
 其他类型ANR也是这样的思路分析。
 
-![image-20251105134049807](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105134049807.png)
+<img width="1105" height="255" alt="image" src="https://github.com/user-attachments/assets/7cc6159a-d90c-4ba6-a257-d0f7840ca61c" />
+
 
 2）、查看当前系统负载情况，CPU、内存、IO这些。
 
@@ -246,7 +251,7 @@ InputDispatchingTimeout ANR发生过程：
 
 其他情况，IO、内存占比高也是类似的分析思路。
 
-![image-20251105134110008](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105134110008.png)
+<img width="1132" height="249" alt="image" src="https://github.com/user-attachments/assets/a5bcc75f-ca93-476c-9663-a753e14c45f5" />
 
 3）、查看调用堆栈以及分析代码。这是最重要的分析步骤，这里面可能遇到多种情况。常见的有主线程正在进行耗时操作，主线程在进行同步操作时被block在锁上等。
 
@@ -258,19 +263,22 @@ case1：主线程在进行耗时操作
 
 以下面的trace为例，看到是“Native”状态，正在执行本地方法，此时是正在执行的状态，大概率此时主线程正在进行超时操作。继续查看他的调用栈信息，找到响应的代码，看此时正在执行什么操作，进一步定位和解决问题。
 
-![image-20251105134143652](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105134143652.png)
+<img width="1088" height="445" alt="image" src="https://github.com/user-attachments/assets/728d40d8-ad55-42e0-9226-87b00e338b65" />
+
 
 case2：主线程被block
 
 这种也是非常常见的情形，以下面trace为例。此时是“Waiting”状态，说明主线程此时block状态。通过关键字locked找到此时在等待的锁是“0x2bbf9d9e”这个对象。然后在trace文件搜索这个锁当前被谁持有。再分析持有锁的线程此时在进行什么操作。进而定位和解决问题。
 
-![image-20251105134205109](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105134205109.png)
+<img width="1095" height="350" alt="image" src="https://github.com/user-attachments/assets/04b6aab7-0390-4e69-86f6-b0e41bfd7fde" />
+
 
 trace文件详细解读
 
 阅读trace文件是分析ANR最主要的途径，下面对各字段的意义进行详细的解读
 
-![image-20251105134440435](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251105134440435.png)
+<img width="861" height="186" alt="image" src="https://github.com/user-attachments/assets/a6d08efc-8ee5-4a0f-8832-84bf3da74cff" />
+
 
 第1行：
 
@@ -332,7 +340,8 @@ mutex: 持有锁的类型。exclusive是独占锁，shared是共享锁；
 
 关于线程状态，它的来源有java层和navite层两个，他们的对应关系和意义如下：
 
-![2](https://img2024.cnblogs.com/blog/811006/202508/811006-20250809200840440-696027973.png)
+<img width="664" height="471" alt="image" src="https://github.com/user-attachments/assets/01a35ec2-5a26-4368-b297-83a7e14c8f95" />
+
 
 
 
@@ -340,7 +349,8 @@ mutex: 持有锁的类型。exclusive是独占锁，shared是共享锁；
 
 结合ANR分析的案例场景，总结出ANR分析的大概流程：
 
-![3](https://img2024.cnblogs.com/blog/811006/202508/811006-20250809200800850-885347356.png)
+<img width="763" height="546" alt="image" src="https://github.com/user-attachments/assets/52e3b78a-cf14-4048-bf2e-57dff4b987b7" />
+
 
 在工作中我们应该保持良好编程习惯，避免ANR问题的发生：
 
@@ -354,3 +364,4 @@ mutex: 持有锁的类型。exclusive是独占锁，shared是共享锁；
 
 
 5）设计编码中注意同步逻辑，避免出现同步死锁问题。
+
