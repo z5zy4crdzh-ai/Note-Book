@@ -2,7 +2,7 @@
 
 
 
-dumpsys是一个android手机里面的可执行文件。
+dumpsys是一个android里面的可执行文件。
 从名字就可以看出，主要是用于dump 当前android system的一些信息。比如
 
 ```
@@ -219,4 +219,5 @@ nDumpProfileInfo也是一个native函数，也是去抓取一些graphic信息，
 
 dumpsys的实现其实是通过serviceManager拿到对应的service信息，然后执行该service的dump函数。
 需要注意的是：每个service都有一个权限检查，需要系统app才可以dump。
+
 
