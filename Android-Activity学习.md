@@ -212,7 +212,8 @@ Activity作为四大组件之一，也可以说是四大组件中最重要的一
 >
 > 3.3.同一个Task Stack，只要不在栈顶，就是onStop状态：
 
-![image-20251118110024888](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251118110024888.png)
+<img width="350" height="192" alt="image" src="https://github.com/user-attachments/assets/4335efd5-c616-40ad-919f-0b249e003e98" />
+
 
 > 3.4.任务栈的id自增长型，是Integer类型。
 >
@@ -247,7 +248,8 @@ Activity作为四大组件之一，也可以说是四大组件中最重要的一
 
 该模式可以被设定，不在manifest设定时候，Activity的默认模式就是standard。在该模式下，启动的Activity会依照启动顺序被依次压入Task中：
 
-![image-20251118110102734](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251118110102734.png)
+<img width="823" height="402" alt="image" src="https://github.com/user-attachments/assets/4ee2c466-bb73-407b-a2de-7f4994721501" />
+
 
 上面这张图讲的已经很清楚了，我想应该不用做什么实验来论证了吧，这个是最简单的一个，我们过。
 
@@ -257,7 +259,8 @@ Activity作为四大组件之一，也可以说是四大组件中最重要的一
 
 在该模式下，如果栈顶Activity为我们要新建的Activity（目标Activity），那么就不会重复创建新的Activity。
 
-![image-20251118110126459](C:\Users\Y6809\AppData\Roaming\Typora\typora-user-images\image-20251118110126459.png)
+<img width="867" height="389" alt="image" src="https://github.com/user-attachments/assets/69c73bf0-bf48-4f12-b932-65f8c26eecc6" />
+
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -486,3 +489,4 @@ Activity作为四大组件之一，也可以说是四大组件中最重要的一
   - singleTask栈内单例清上方，singleInstance孤独一栈无同伴。
 
 - **面试技巧**：结合绘图（任务栈变化）和实际代码逻辑，展示对机制的透彻理解。
+
