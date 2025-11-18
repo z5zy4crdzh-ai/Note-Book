@@ -64,7 +64,7 @@ dumpsys的源码结构其实很简单，只有一个dumpsys.cpp
 
 gfxinfo实例讲解
 
-因为笔者最近在研究手机跑2D/3D场景的性能评测，所以这里以dumpsys **gfxinfo**为例，说下它的大致流程。
+这里以dumpsys **gfxinfo**为例，说下它的大致流程。
 
 具体服务
 
@@ -219,5 +219,6 @@ nDumpProfileInfo也是一个native函数，也是去抓取一些graphic信息，
 
 dumpsys的实现其实是通过serviceManager拿到对应的service信息，然后执行该service的dump函数。
 需要注意的是：每个service都有一个权限检查，需要系统app才可以dump。
+
 
 
