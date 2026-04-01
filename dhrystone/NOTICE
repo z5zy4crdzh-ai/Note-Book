@@ -1,0 +1,11 @@
+Notice for Dhrystone benchmark:
+
+Original Version (in Ada) published in "Communications of the ACM" vol. 27., no. 10 (Oct. 1984),
+pp. 1013 - 1030, together with the statistics on which the distribution of statements etc. is based.
+
+C version adapted by:
+- Reinhold P. Weicker, Siemens Nixdorf, Paderborn/Germany
+- Rick Richardson, PC Research. Inc.
+- Steven Pemberton, CWI, Amsterdam
+
+This version has been modified to be compatible with the Android build system.

@@ -1,0 +1,43 @@
+# Dhrystone for Android
+
+This is an Android-compatible version of the Dhrystone 2.2 benchmark, modified to build with the Android build system.
+
+## Building
+
+To build the Dhrystone benchmark for Android:
+
+1. Place this directory in the Android source tree under `external/dhrystone-master`
+2. Build using the Android build system:
+   ```
+   m dhrystone dhrystone_reg dhrystone_opt
+   ```
+
+## Variants
+
+Three variants of the benchmark are provided:
+
+1. `dhrystone` - Standard version
+2. `dhrystone_reg` - Version with register optimization (-DREG)
+3. `dhrystone_opt` - Version with additional compiler optimizations
+
+## Running
+
+To run the benchmark on an Android device:
+
+1. Push the binary to the device:
+   ```
+   adb push $OUT/vendor/bin/dhrystone /vendor/bin/
+   ```
+
+2. Run the benchmark:
+   ```
+   adb shell /vendor/bin/dhrystone [number_of_runs]
+   ```
+
+   Where `[number_of_runs]` is an optional parameter specifying the number of iterations (default: 50000).
+
+## Notes
+
+- The HZ value is set to 100 by default for Android. If your device uses a different value, you may need to adjust this in the code or pass it as a compile-time definition.
+- Results are output to both stdout and stderr. The final benchmark results go to stdout, while validation information goes to stderr.
+- For meaningful results, ensure the device is in a stable thermal state and not running other CPU-intensive tasks.
