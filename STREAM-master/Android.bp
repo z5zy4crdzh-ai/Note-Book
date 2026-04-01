@@ -1,0 +1,25 @@
+cc_binary {
+    name: "stream_android",
+    srcs: ["stream.c"],
+    
+    // 编译参数优化
+    cflags: [
+        "-O3",
+		"-fopenmp",
+        "-DSTREAM_ARRAY_SIZE=100000000", // 根据 RAM 大小调整，确保超出 L3 缓存
+        "-DNTIMES=20",
+        "-Wno-deprecated-non-prototype", // 忽略你之前遇到的原型警告
+    ],
+
+    // 静态链接，确保生成的二进制文件可以在任何相同架构的 Android 设备运行
+    static_executable: true,
+    static_libs: ["libomp"],
+    // 针对不同架构的特定优化（可选）
+    arch: {
+        arm64: {
+            cflags: ["-mcpu=generic"], 
+        },
+    },
+
+
+}
